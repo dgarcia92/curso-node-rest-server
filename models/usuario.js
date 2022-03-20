@@ -30,8 +30,19 @@ const UsuarioSchema = Schema({
         type: Boolean,
         default: false
     }
-    
-
 });
+
+
+/* Metodo para sobre escribir el metodo to json 
+    Removemos la version y el password y utilizamos el operador rest ... y se asigna el resto en una variable
+    llamada usuario y la retornamos
+*/
+
+UsuarioSchema.methods.toJSON = function(){
+    const { __v, password, ...usuario } = this.toObject();
+    return usuario;
+}
+
+
 
 module.exports = model( 'Usuario', UsuarioSchema );
